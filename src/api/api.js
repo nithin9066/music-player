@@ -1,6 +1,6 @@
 
 const baseUrl = (path) => {
-    return "http://de1.api.radio-browser.info/json/" + path
+    return "https://de1.api.radio-browser.info/json/" + path
 }
 
 export const getCountries = async () => {
