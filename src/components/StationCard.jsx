@@ -15,7 +15,7 @@ export default function StationCard({ station }) {
     dispatch(setCurrentStation(station))
   }
   return (
-    <List onClick={PlayStation} sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <List onClick={PlayStation} sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt={station.name} src={station.favicon} />

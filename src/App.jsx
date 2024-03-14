@@ -4,10 +4,7 @@ import ButtonAppBar from './components/ButtonAppBar'
 import { getCountries } from './api/api'
 import { useQuery } from 'react-query'
 import randomColor from 'randomcolor'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCountries, setCurrentCountry } from './redux/PlayerSlice'
-import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 
 function App() {

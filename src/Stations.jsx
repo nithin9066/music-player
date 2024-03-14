@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Typography } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
+import ButtonAppBar from './components/ButtonAppBar';
 
 export default function Stations() {
     const [limit, setLimit] = useState(10);
@@ -35,10 +36,10 @@ export default function Stations() {
     return (
         <>
             <div>
-                <Link to={'/'}><ArrowBackIcon /></Link>
-                <Typography variant='h4'>Stations</Typography>
+                <ButtonAppBar heading={'Stations'} />
             </div>
             <InfiniteScroll
+                style={{marginTop: 60}}
                 pageStart={0}
                 loadMore={loadFunc}
                 hasMore={isSuccess && data.length > 0}
