@@ -27,7 +27,7 @@ function App() {
 
   return (
     <>
-      <SearchAppBar title={"Radio"} placeholder={"search country..."} setQuery={setQuery} />
+      <SearchAppBar title={"Radio App"} placeholder={"search country..."} setQuery={setQuery} />
       <Grid container marginTop={13} marginBottom={20}>
         { isSuccess ?
           countries?.map((country, key) => {
