@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.7",
     "localforage": "^1.10.0",
+    "lodash.debounce": "^4.0.8",
     "match-sorter": "^6.3.4",
     "randomcolor": "^0.6.2",
     "react": "^18.2.0",
