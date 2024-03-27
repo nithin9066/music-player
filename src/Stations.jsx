@@ -49,7 +49,6 @@ export default function Stations() {
                 pageStart={0}
                 loadMore={loadFunc}
                 hasMore={isSuccess && data.length > 0}
-                loader={isLoading ? <div style={{position: 'fixed', bottom: 5, width: '100%', left: 0}}><div style={{display: 'flex', justifyContent: 'center'}}><CircularProgress key={0} /></div></div> : ''}
             >
                 {stations?.map((station, key) => <StationCard key={key} station={station} />)}
             </InfiniteScroll>
