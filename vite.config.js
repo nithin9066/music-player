@@ -6,8 +6,5 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['@mui_material_InputBase.js']
-  },
-  build: {
-    manifest: true,
-  },
+  }
 })

@@ -37,27 +37,23 @@ export default function Stations() {
         setOffset(0)
         setLimit(10)
     }, [name])
-
+    
     return (
         <>
             <div>
-                <SearchAppBar title={'Stations'} setQuery={setName} />
+                <SearchAppBar title={'Stations'} setName={setName} />
             </div>
-            {isSuccess ?
-                <>
-                    <InfiniteScroll
-                        style={{ marginTop: 100, marginBottom: 150 }}
-                        pageStart={0}
-                        loadMore={loadFunc}
-                        hasMore={isSuccess && data.length > 0}
-                        loader={<div className="loader" key={0}>Loading ...</div>}
-                    >
-                        {stations?.map((station, key) => station.name ? <StationCard key={station.changeuuid} station={station} /> : '')}
-                    </InfiniteScroll>
-
-                    {stations.length == 0 ? <div style={{ height: '100dvh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 0 }}><h1>No Station Found!</h1></div> : ''}
-                </>
-                : ''}
+            <InfiniteScroll
+                style={{ marginTop: 100 }}
+                pageStart={0}
+                loadMore={loadFunc}
+                hasMore={isSuccess && data.length > 0}
+                loader={<div className="loader" key={0}>Loading ...</div>}
+            >
+                {stations?.map((station, key) => <StationCard key={station.changeuuid} station={station} />)}
+            </InfiniteScroll>
+            
+            {stations.length == 0 ? <div><h1>No Station Found!</h1></div> : ''}
         </>
     )
 }
