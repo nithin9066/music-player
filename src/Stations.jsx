@@ -5,6 +5,7 @@ import StationCard from './components/StationCard'
 import InfiniteScroll from 'react-infinite-scroller';
 import { useLocation } from 'react-router-dom';
 import SearchAppBar from './components/SearchAppBar';
+import { CircularProgress } from '@mui/material';
 
 export default function Stations() {
     const [limit, setLimit] = useState(10);
