@@ -9,26 +9,26 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import { useSelector } from 'react-redux';
 import { CircularProgress } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNextStation, setPrevStation } from '../redux/PlayerSlice';
 const audio = new Audio();
 
 export default function MusicPlayer() {
-    const theme = useTheme();
     const [isPlaying, setIsPlaying] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(true)
-
-
-    const currentStation = useSelector((state) => state.player.currentStation);
+    const currentStation = useSelector(state => state.player.stations[state.player.currentStationIndex])
+    const currentIndex = useSelector(state => state.player.currentStationIndex)
+    const dispatch = useDispatch();
+    
     React.useEffect(() => {
-        if (currentStation) {
+        if (currentStation?.url) {
             audio.src = currentStation.url;
             setIsLoading(true)
             audio.play().then(() => {
                 setIsPlaying(true)
             }).catch(error => {
                 console.error('Error loading audio:', error);
-                // Handle the error (e.g., show an error message to the user)
             }).finally(() => setIsLoading(false))
         }
         return () => {
@@ -36,7 +36,7 @@ export default function MusicPlayer() {
             audio.src = '';
             setIsPlaying(false)
         }
-    }, [currentStation.url])
+    }, [currentStation?.url])
 
     const PlayOrPause = () => {
         if (!isPlaying) {
@@ -64,16 +64,16 @@ export default function MusicPlayer() {
                             </Typography>
                         </CardContent>
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', pl: 1, pb: 1 }}>
-                            <IconButton aria-label="previous">
-                                {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+                            <IconButton aria-label="previous" disabled={currentIndex == 0 ? true : false} onClick={() => dispatch(setPrevStation())}>
+                                <SkipPreviousIcon />
                             </IconButton>
                             <IconButton aria-label="play/pause" onClick={PlayOrPause}>
                                 {
                                     isLoading ? <CircularProgress /> : isPlaying ? <PauseCircleIcon sx={{ height: 38, width: 38 }} /> : <PlayArrowIcon sx={{ height: 38, width: 38 }} />
                                 }
                             </IconButton>
-                            <IconButton aria-label="next">
-                                {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+                            <IconButton aria-label="next" onClick={() => dispatch(setNextStation())}>
+                                <SkipNextIcon />
                             </IconButton>
                         </Box>
                     </Box>

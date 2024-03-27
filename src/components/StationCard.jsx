@@ -7,12 +7,12 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { useDispatch } from 'react-redux';
-import { setCurrentStation } from '../redux/PlayerSlice';
+import { setStationIndex } from '../redux/PlayerSlice';
 
-export default function StationCard({ station }) {
+export default function StationCard({ station, index }) {
   const dispatch = useDispatch();
   const PlayStation = () => {
-    dispatch(setCurrentStation(station))
+    dispatch(setStationIndex(index))
   }
   return (
     <List onClick={PlayStation} sx={{ width: '100%', bgcolor: 'background.paper' }}>

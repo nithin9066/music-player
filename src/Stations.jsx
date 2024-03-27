@@ -6,11 +6,14 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useLocation } from 'react-router-dom';
 import SearchAppBar from './components/SearchAppBar';
 import { CircularProgress } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setStations } from './redux/PlayerSlice';
 
 export default function Stations() {
     const [limit, setLimit] = useState(10);
     const [offset, setOffset] = useState(0);
-    const [stations, setStations] = useState([]);
+    const { currentStationIndex, stations } = useSelector(state => state.player)
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search); // Parse query string
@@ -19,25 +22,27 @@ export default function Stations() {
     const { isSuccess, isError, error, data, isLoading } = useQuery(['stations', limit, offset, name], () => getStations(country, limit, offset, name))
     useEffect(() => {
         if (isSuccess) {
-            offset > 0 ? setStations(preStation => [...preStation, ...data]) : setStations(data)
+            offset > 0 ? dispatch(setStations([...stations, ...data])) : dispatch(setStations((data)))
         }
     }, [data, limit, offset])
     const loadFunc = () => {
         setOffset(preOffset => preOffset + limit)
         setLimit(prevLimit => prevLimit + 5)
     }
-    const abortController = new AbortController();
     useEffect(() => {
-        return () => {
-            // Cleanup function to abort fetching when unmounting
-            abortController.abort();
-        };
-    }, []);
-    useEffect(() => {
-        setStations([])
-        setOffset(0)
-        setLimit(10)
+        if(name != '') {
+            dispatch(setStations([]))
+            setOffset(0)
+            setLimit(10)
+        }
     }, [name])
+
+    useEffect(() => {
+        if(stations?.length - (currentStationIndex + 3) <= 0) {
+            loadFunc();
+        }
+    }, [currentStationIndex])
+    
     
     return (
         <>
@@ -51,7 +56,7 @@ export default function Stations() {
                 hasMore={isSuccess && data.length > 0}
                 loader={<div style={{textAlign:'center'}}><CircularProgress color='secondary' key={0} /></div>}
             >
-                {stations?.map((station, key) => <StationCard key={key} station={station} />)}
+                {stations?.map((station, key) => <StationCard key={key} index={key} station={station} />)}
             </InfiniteScroll>
             
             {stations.length == 0 ? <div><h1>No Station Found!</h1></div> : ''}
