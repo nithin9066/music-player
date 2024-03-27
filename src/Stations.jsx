@@ -5,7 +5,6 @@ import StationCard from './components/StationCard'
 import InfiniteScroll from 'react-infinite-scroller';
 import { useLocation } from 'react-router-dom';
 import SearchAppBar from './components/SearchAppBar';
-import { CircularProgress } from '@mui/material';
 
 export default function Stations() {
     const [limit, setLimit] = useState(10);
@@ -49,6 +48,7 @@ export default function Stations() {
                 pageStart={0}
                 loadMore={loadFunc}
                 hasMore={isSuccess && data.length > 0}
+                loader={<div style={{textAlign:'center'}}><CircularProgress color='secondary' key={0} /></div>}
             >
                 {stations?.map((station, key) => <StationCard key={key} station={station} />)}
             </InfiniteScroll>
