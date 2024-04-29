@@ -38,7 +38,7 @@ function App() {
               return (
   
                 <Grid xs={6} padding={.5} key={key}>
-                  <Link to={`/stations?country=${country.name}`}>
+                  <Link to={`/stations?country=${country.name}`} style={{ textDecoration: 'none' }}>
                     <ActionAreaCard country={country} color={color} />
                   </Link>
                 </Grid>

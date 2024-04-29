@@ -23,7 +23,7 @@ export default function StationCard({ station, index }) {
         <ListItemText
           secondary={
             <Typography
-              sx={{ display: 'inline', textDecoration: 'none' }}
+              sx={{ display: 'inline' }}
               component="span"
               variant="body2"
               color="text.primary"
