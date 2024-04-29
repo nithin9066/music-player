@@ -47,7 +47,7 @@ export default function Stations() {
     return (
         <>
             <div>
-                <SearchAppBar title={'Stations'} setName={setName} />
+                <SearchAppBar title={'Stations'} setQuery={setName} />
             </div>
             <InfiniteScroll
                 style={{ marginTop: 100 }}
