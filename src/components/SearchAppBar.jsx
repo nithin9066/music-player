@@ -65,8 +65,8 @@ export default function SearchAppBar({ title, setQuery, placeholder }) {
                 >
                     {title}
                 </Typography>
-                <Toolbar>
-                    <Search>
+                <Toolbar sx={{justifyContent: 'center'}}>
+                    <Search sx={{padding:0}}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
