@@ -59,7 +59,7 @@ export default function Stations() {
                 {stations?.map((station, key) => <StationCard key={key} index={key} station={station} />)}
             </InfiniteScroll>
             
-            {isSuccess && stations.length == 0 ? <div><h1>No Station Found!</h1></div> : ''}
+            {isLoading ? <div><h1>Loading...</h1></div> : (stations.length == 0 ? <div><h1>No Station Found!</h1></div> : '')}
         </>
     )
 }
